@@ -1,9 +1,9 @@
-from ..models import save_pickle,\
+from .models import save_pickle,\
     open_pickle, filter_terms_not_in_wemodel
 from collections import defaultdict
 from gensim.models import KeyedVectors
 
-EXPERIMENT_DEFINITION_PATH = '../data/interim/experiment_definitions.pickle'
+EXPERIMENT_DEFINITION_PATH = '../data/interim/experiment_definitions_test.pickle'
 # This is the path from which the model is *loaded*,
 # so make sure this points to normed vectors if necessary.
 MODEL_PATH = '../data/interim/glove_840_norm'
@@ -25,6 +25,8 @@ def add_experiment_definition(exp_num, X_terms, Y_terms, A_terms, B_terms, X_lab
     dct[exp_num]['A_label'] = A_label
     dct[exp_num]['B_label'] = B_label
     save_pickle(dct, filepath)
+
+create_new_experiment_dict(EXPERIMENT_DEFINITION_PATH)
 
 # WEAT 1
 exp_num = 1
@@ -253,3 +255,5 @@ X_terms, Y_terms = filter_terms_not_in_wemodel(we_model, X_terms, Y_terms)
 A_terms, B_terms = filter_terms_not_in_wemodel(we_model, A_terms, B_terms)
 add_experiment_definition(exp_num, X_terms, Y_terms, A_terms, B_terms, 
                           X_label, Y_label, A_label, B_label, EXPERIMENT_DEFINITION_PATH)
+
+print(f'All experiment definitions successfully saved to {EXPERIMENT_DEFINITION_PATH}')
