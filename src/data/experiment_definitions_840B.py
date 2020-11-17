@@ -3,11 +3,6 @@ from ..models import save_pickle,\
 from collections import defaultdict
 
 EXPERIMENT_DEFINITION_PATH = '../data/interim/experiment_definitions.pickle'
-we_model_name = "sg_dim300_min100_win5"
-we_vector_size = 300
-we_model_dir = '../data/external/wiki-english/wiki-english-20171001/%s' % we_model_name
-
-we_model = Word2Vec.load(we_model_dir+'/model.gensim')
 
 def create_new_experiment_dict(experiment_definition_path):
     dct = defaultdict(dict)
