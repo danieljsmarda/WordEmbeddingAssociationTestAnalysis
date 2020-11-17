@@ -1,6 +1,7 @@
 from ..models import save_pickle,\
     filter_terms_not_in_wemodel
 from collections import defaultdict
+from gensim.models import KeyedVectors
 
 EXPERIMENT_DEFINITION_PATH = '../data/interim/experiment_definitions.pickle'
 # This is the path from which the model is *loaded*,
