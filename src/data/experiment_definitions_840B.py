@@ -1,5 +1,5 @@
 from ..models import save_pickle,\
-    filter_terms_not_in_wemodel
+    open_pickle, filter_terms_not_in_wemodel
 from collections import defaultdict
 from gensim.models import KeyedVectors
 
