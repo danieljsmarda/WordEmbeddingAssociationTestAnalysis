@@ -3,6 +3,11 @@ from ..models import save_pickle,\
 from collections import defaultdict
 
 EXPERIMENT_DEFINITION_PATH = '../data/interim/experiment_definitions.pickle'
+# This is the path from which the model is *loaded*,
+# so make sure this points to normed vectors if necessary.
+MODEL_PATH = '../data/interim/glove_840_norm'
+
+we_model = KeyedVectors.load(MODEL_PATH, mmap='r')
 
 def create_new_experiment_dict(experiment_definition_path):
     dct = defaultdict(dict)
