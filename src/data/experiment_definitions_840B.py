@@ -84,26 +84,26 @@ X_label = 'Eur-Am Names'
 Y_label = 'Afr-Am Names'
 A_label = 'Pleasant'
 B_label = 'Unpleasant'
-X_terms = ['adam', 'chip', 'harry', 'josh','roger','alan','frank','ian', 'justin',
-          'ryan','andrew','fred','jack','matthew','stephen','brad','greg','jed',
-          'paul','todd','brandon','hank','jonathan','peter','wilbur','amanda',
-          'courtney','heather','melanie','sara','amber','crystal','katie',
-          'meredith','shannon','betsy','donna','kristin','nancy','stephanie',
-          'Bobbie-Sue','ellen','lauren','peggy','Sue-Ellen','colleen','emily',
-          'megan','rachel','wendy']
-X_italics = ['chip', 'ian', 'fred', 'jed', 'todd', 'brandon', 'hank',
-            'wilbur', 'sara', 'amber', 'crystal', 'meredith', 'shannon', 'donna',
-            'Bobbie-Sue', 'peggy', 'Sue-Ellen', 'wendy']
-Y_terms = ['alonzo','jamel','lerone', 'percell', 'theo','alphonse','jerome','leroy',
-           'rasaan', 'torrance','darnell','lamar','lionel','rashaun','tyree','deion',
-          'lamont','malik','terrence','tyrone','everol', 'lavon', 'marcellus', 'terryl',
-          'wardell','aiesha','lashelle','nichelle','shereen','temeka','ebony',
-          'latisha','shaniqua','tameisha','teretha','jasmine','latonya','shanise',
-          'tanisha','tia','lakisha','latoya','sharise','tashika','yolanda',
-          'lashandra','malika','shavonn','tawanda','yvette']
-Y_italics = ['lerone', 'percell', 'rasaan', 'rashaun', 'everol', 'terryl','aiesha',
-            'lashelle', 'temeka', 'tameisha', 'teretha', 'latonya', 'shanise',
-            'sharise', 'tashika', 'lashandra', 'shavonn', 'tawanda']
+X_terms = ['Adam', 'Chip', 'Harry', 'Josh','Roger','Alan','Frank','Ian', 'Justin',
+          'Ryan','Andrew','Fred','Jack','Matthew','Stephen','Brad','Greg','Jed',
+          'Paul','Todd','Brandon','Hank','Jonathan','Peter','Wilbur','Amanda',
+          'Courtney','Heather','Melanie','Sara','Amber','Crystal','Katie',
+          'Meredith','Shannon','Betsy','Donna','Kristin','Nancy','Stephanie',
+          'Bobbie-Sue','Ellen','Lauren','Peggy','Sue-Ellen','Colleen','Emily',
+          'Megan','Rachel','Wendy']
+X_italics = ['Chip', 'Ian', 'Fred', 'Jed', 'Todd', 'Brandon', 'Hank',
+            'Wilbur', 'Sara', 'Amber', 'Crystal', 'Meredith', 'Shannon', 'Donna',
+            'Bobbie-Sue', 'Peggy', 'Sue-Ellen', 'Wendy']
+Y_terms = ['Alonzo','Jamel','Lerone', 'Percell', 'Theo','Alphonse','Jerome','Leroy',
+           'Rasaan', 'Torrance','Darnell','Lamar','Lionel','Rashaun','Tyree','Deion',
+          'Lamont','Malik','Terrence','Tyrone','Everol', 'Lavon', 'Marcellus', 'Terryl',
+          'Wardell','Aiesha','Lashelle','Nichelle','Shereen','Temeka','Ebony',
+          'Latisha','Shaniqua','Tameisha','Teretha','Jasmine','Latonya','Shanise',
+          'Tanisha','Tia','Lakisha','Latoya','Sharise','Tashika','Yolanda',
+          'Lashandra','Malika','Shavonn','Tawanda','Yvette']
+Y_italics = ['Lerone', 'Percell', 'Rasaan', 'Rashaun', 'Everol', 'Terryl','Aiesha',
+            'Lashelle', 'Temeka', 'Tameisha', 'Teretha', 'Latonya', 'Shanise',
+            'Sharise', 'Tashika', 'Lashandra', 'Shavonn', 'Tawanda']
 A_terms = ['caress','freedom','health','love','peace','cheer','friend','heaven',
           'loyal','pleasure','diamond','gentle','honest','lucky','rainbow',
           'diploma','gift','honor','miracle','sunrise','family','happy','laughter',
@@ -111,8 +111,6 @@ A_terms = ['caress','freedom','health','love','peace','cheer','friend','heaven',
 B_terms = ['abuse','crash','filth','murder','sickness','accident','death','grief',
           'poison','stink','assault','disaster','hatred','pollute','tragedy','bomb',
           'divorce','jail','poverty','ugly','cancer','evil','kill','rotten','vomit']
-X_terms = [s.capitalize() for s in X_terms if s not in X_italics]
-Y_terms = [s.capitalize() for s in Y_terms if s not in Y_italics]
 X_terms, Y_terms = filter_terms_not_in_wemodel(we_model, X_terms, Y_terms)
 A_terms, B_terms = filter_terms_not_in_wemodel(we_model, A_terms, B_terms)
 add_experiment_definition(exp_num, X_terms, Y_terms, A_terms, B_terms, 
@@ -124,14 +122,14 @@ X_label = 'Eur-Am Names'
 Y_label = 'Afr-Am Names'
 A_label = 'Pleasant'
 B_label = 'Unpleasant'
-X_terms = ['brad', 'brendan', 'geoffrey', 'greg', 'brett', 'jay', 'matthew', 'neil', 
-            'todd', 'allison', 'anne', 'carrie', 'emily', 'jill', 'laurie', 'kristen',
-            'meredith', 'sarah']
-X_italics = ['jay','kristen']
-Y_terms = ['darnell', 'hakim', 'jermaine', 'kareem', 'jamal', 'leroy', 'rasheed',
-        'tremayne', 'tyrone', 'aisha', 'ebony', 'keisha', 'kenya', 'latonya', 
-        'lakisha', 'latoya', 'tamika', 'tanisha']
-Y_italics = ['tremayne', 'latonya']
+X_terms = ['Brad', 'Brendan', 'Geoffrey', 'Greg', 'Brett', 'Jay', 'Matthew', 'Neil', 
+            'Todd', 'Allison', 'Anne', 'Carrie', 'Emily', 'Jill', 'Laurie', 'Kristen',
+            'Meredith', 'Sarah']
+X_italics = ['Jay','Kristen']
+Y_terms = ['Darnell', 'Hakim', 'Jermaine', 'Kareem', 'Jamal', 'Leroy', 'Rasheed',
+        'Tremayne', 'Tyrone', 'Aisha', 'Ebony', 'Keisha', 'Kenya', 'Latonya', 
+        'Lakisha', 'Latoya', 'Tamika', 'Tanisha']
+Y_italics = ['Tremayne', 'Latonya']
 A_terms = ['caress','freedom','health','love','peace','cheer','friend','heaven',
            'loyal','pleasure','diamond','gentle','honest','lucky','rainbow','diploma',
            'gift','honor','miracle','sunrise','family','happy','laugher','paradise',
@@ -140,9 +138,6 @@ B_terms = ['abuse','crash','filth','murder','sickness','accident','death','grief
           'poison','stink','assault','disaster','hatred','pollute','tragedy',
           'bomb','divorce','jail','poverty','ugly','cancer','evil','kill',
           'rotten','vomit']
-X_terms = [s.capitalize() for s in X_terms if s not in X_italics]
-Y_terms = [s.capitalize() for s in Y_terms if s not in Y_italics]
-#[X_terms, Y_terms, A_tersm, B_terms] = [[str.lower(term) for term in terms] for terms in [X_terms, Y_terms, A_terms, B_terms]]
 X_terms, Y_terms = filter_terms_not_in_wemodel(we_model, X_terms, Y_terms)
 A_terms, B_terms = filter_terms_not_in_wemodel(we_model, A_terms, B_terms)
 add_experiment_definition(exp_num, X_terms, Y_terms, A_terms, B_terms, 
@@ -155,19 +150,16 @@ X_label = 'Eur-Am Names'
 Y_label = 'Afr-Am Names'
 A_label = 'Pleasant'
 B_label = 'Unpleasant'
-X_terms = ['brad', 'brendan', 'geoffrey', 'greg', 'brett', 'jay', 'matthew',
-            'neil', 'todd', 'allison', 'anne', 'carrie', 'emily', 'jill',
-            'laurie', 'kristen', 'meredith', 'sarah']
-X_italics = ['jay','kristen']
-Y_terms = ['darnell', 'hakim', 'jermaine', 'kareem', 'jamal', 'leroy', 'rasheed',
-        'tremayne', 'tyrone', 'aisha', 'ebony', 'keisha', 'kenya', 'latonya',
-        'latoya', 'tamika', 'tanisha']
-Y_italics = ['tremayne', 'latonya']
+X_terms = ['Brad', 'Brendan', 'Geoffrey', 'Greg', 'Brett', 'Jay', 'Matthew',
+            'Neil', 'Todd', 'Allison', 'Anne', 'Carrie', 'Emily', 'Jill',
+            'Laurie', 'Kristen', 'Meredith', 'Sarah']
+X_italics = ['Jay','Kristen']
+Y_terms = ['Darnell', 'Hakim', 'Jermaine', 'Kareem', 'Jamal', 'Leroy', 'Rasheed',
+        'Tremayne', 'Tyrone', 'Aisha', 'Ebony', 'Keisha', 'Kenya', 'Latonya',
+        'Latoya', 'Tamika', 'Tanisha']
+Y_italics = ['Tremayne', 'Latonya']
 A_terms = ['joy', 'love', 'peace', 'wonderful', 'pleasure', 'friend', 'laughter', 'happy']
 B_terms = ['agony', 'terrible', 'horrible', 'nasty', 'evil', 'war', 'awful', 'failure']
-X_terms = [s.capitalize() for s in X_terms if s not in X_italics]
-Y_terms = [s.capitalize() for s in Y_terms if s not in Y_italics]
-#[X_terms, Y_terms, A_tersm, B_terms] = [[str.lower(term) for term in terms] for terms in [X_terms, Y_terms, A_terms, B_terms]]
 X_terms, Y_terms = filter_terms_not_in_wemodel(we_model, X_terms, Y_terms)
 A_terms, B_terms = filter_terms_not_in_wemodel(we_model, A_terms, B_terms)
 add_experiment_definition(exp_num, X_terms, Y_terms, A_terms, B_terms, 
@@ -179,16 +171,12 @@ X_label = 'Male Names'
 Y_label = 'Female Names'
 A_label = 'Career'
 B_label = 'Family'
-X_terms = ['john', 'paul','mike','kevin','steve','greg','jeff','bill']
-Y_terms = ['amy','joan','lisa','sarah','diana','kate','ann','donna']
+X_terms = ['John', 'Paul','Mike','Kevin','Steve','Greg','Jeff','Bill']
+Y_terms = ['Amy','Joan','Lisa','Sarah','Diana','Kate','Ann','Donna']
 A_terms = ['executive','management','professional','corporation',
                'salary','office','business','career']
 B_terms = ['home','parents','children','family',
                'cousins','marriage','wedding','relatives']
-
-X_terms = [s.capitalize() for s in X_terms if s not in X_italics]
-Y_terms = [s.capitalize() for s in Y_terms if s not in Y_italics]
-#[X_terms, Y_terms, A_tersm, B_terms] = [[str.lower(term) for term in terms] for terms in [X_terms, Y_terms, A_terms, B_terms]]
 X_terms, Y_terms = filter_terms_not_in_wemodel(we_model, X_terms, Y_terms)
 A_terms, B_terms = filter_terms_not_in_wemodel(we_model, A_terms, B_terms)
 add_experiment_definition(exp_num, X_terms, Y_terms, A_terms, B_terms, 
@@ -209,7 +197,6 @@ A_terms = ['male','man','boy','brother',
               'he','him','his','son']
 B_terms = ['female','woman','girl','sister',
                'she','her','hers','daughter']
-[X_terms, Y_terms, A_tersm, B_terms] = [[str.lower(term) for term in terms] for terms in [X_terms, Y_terms, A_terms, B_terms]]
 X_terms, Y_terms = filter_terms_not_in_wemodel(we_model, X_terms, Y_terms)
 A_terms, B_terms = filter_terms_not_in_wemodel(we_model, A_terms, B_terms)
 add_experiment_definition(exp_num, X_terms, Y_terms, A_terms, B_terms, 
@@ -229,7 +216,6 @@ A_terms = ['brother','father','uncle','grandfather',
           'son','he','his','him']
 B_terms = ['sister','mother','aunt','grandmother',
           'daughter','she','hers','her']
-[X_terms, Y_terms, A_tersm, B_terms] = [[str.lower(term) for term in terms] for terms in [X_terms, Y_terms, A_terms, B_terms]]
 X_terms, Y_terms = filter_terms_not_in_wemodel(we_model, X_terms, Y_terms)
 A_terms, B_terms = filter_terms_not_in_wemodel(we_model, A_terms, B_terms)
 add_experiment_definition(exp_num, X_terms, Y_terms, A_terms, B_terms, 
@@ -262,7 +248,6 @@ X_terms = ['Tiffany', 'Michelle', 'Cindy', 'Kristy', 'Brad', 'Eric', 'Joey', 'Bi
 Y_terms = ['Ethel', 'Bernice', 'Gertrude', 'Agnes', 'Cecil', 'Wilbert', 'Mortimer', 'Edgar']
 A_terms = ['joy', 'love', 'peace', 'wonderful', 'pleasure', 'friend', 'laughter', 'happy']
 B_terms = ['agony', 'terrible', 'horrible', 'nasty', 'evil', 'war', 'awful', 'failure']
-[X_terms, Y_terms, A_tersm, B_terms] = [[str.lower(term) for term in terms] for terms in [X_terms, Y_terms, A_terms, B_terms]]
 X_terms, Y_terms = filter_terms_not_in_wemodel(we_model, X_terms, Y_terms)
 A_terms, B_terms = filter_terms_not_in_wemodel(we_model, A_terms, B_terms)
 add_experiment_definition(exp_num, X_terms, Y_terms, A_terms, B_terms, 
