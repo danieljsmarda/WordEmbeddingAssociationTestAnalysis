@@ -1,4 +1,4 @@
-from .models import save_pickle,\
+from utils import save_pickle,\
     open_pickle, filter_terms_not_in_wemodel
 from collections import defaultdict
 from gensim.models import KeyedVectors

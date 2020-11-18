@@ -1,3 +1,16 @@
+import pickle
+
+def save_pickle(obj, FILEPATH):
+    f = open(FILEPATH, 'wb')
+    pickle.dump(obj, f)
+    f.close()
+
+def open_pickle(FILEPATH):
+    f = open(FILEPATH, 'rb')
+    obj = pickle.load(f)
+    f.close()
+    return obj
+
 def filter_terms_not_in_wemodel(we_model, X_terms, Y_terms):
     term_list_names = ['first_list', 'second_list']
     term_lists = [X_terms, Y_terms]
