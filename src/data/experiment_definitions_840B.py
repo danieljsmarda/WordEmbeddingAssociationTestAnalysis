@@ -6,7 +6,7 @@ from gensim.models import KeyedVectors
 EXPERIMENT_DEFINITION_PATH = '../data/interim/experiment_definitions_test.pickle'
 # This is the path from which the model is *loaded*,
 # so make sure this points to normed vectors if necessary.
-MODEL_PATH = '../data/interim/glove_840_norm'
+MODEL_PATH = '../../data/interim/glove_840_norm'
 
 we_model = KeyedVectors.load(MODEL_PATH, mmap='r')
 
