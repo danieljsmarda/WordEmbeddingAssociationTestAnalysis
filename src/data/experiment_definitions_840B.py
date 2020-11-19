@@ -3,7 +3,7 @@ from utils import save_pickle,\
 from collections import defaultdict
 from gensim.models import KeyedVectors
 
-EXPERIMENT_DEFINITION_PATH = '../data/interim/experiment_definitions_test.pickle'
+EXPERIMENT_DEFINITION_PATH = '../../data/interim/experiment_definitions_test.pickle'
 # This is the path from which the model is *loaded*,
 # so make sure this points to normed vectors if necessary.
 MODEL_PATH = '../../data/interim/glove_840_norm'
@@ -50,6 +50,7 @@ B_terms = ['abuse','crash','filth','murder','sickness','accident','death','grief
           'poison','stink','assault','disaster','hatred','pollute','tragedy',
           'divorce','jail','poverty','ugly','cancer','kill','rotten','vomit','agony',
           'prison']
+print(f'Experiment {exp_num}:')
 X_terms, Y_terms = filter_terms_not_in_wemodel(we_model, X_terms, Y_terms)
 A_terms, B_terms = filter_terms_not_in_wemodel(we_model, A_terms, B_terms)
 add_experiment_definition(exp_num, X_terms, Y_terms, A_terms, B_terms, 
@@ -75,6 +76,7 @@ B_terms = ['abuse','crash','filth','murder','sickness','accident','death','grief
           'poison','stink','assault','disaster','hatred','pollute','tragedy',
           'divorce','jail','poverty','ugly','cancer','kill','rotten','vomit','agony',
           'prison']
+print(f'Experiment {exp_num}:')
 X_terms, Y_terms = filter_terms_not_in_wemodel(we_model, X_terms, Y_terms)
 A_terms, B_terms = filter_terms_not_in_wemodel(we_model, A_terms, B_terms)
 add_experiment_definition(exp_num, X_terms, Y_terms, A_terms, B_terms, 
@@ -114,6 +116,7 @@ A_terms = ['caress','freedom','health','love','peace','cheer','friend','heaven',
 B_terms = ['abuse','crash','filth','murder','sickness','accident','death','grief',
           'poison','stink','assault','disaster','hatred','pollute','tragedy','bomb',
           'divorce','jail','poverty','ugly','cancer','evil','kill','rotten','vomit']
+print(f'Experiment {exp_num}:')
 X_terms, Y_terms = filter_terms_not_in_wemodel(we_model, X_terms, Y_terms)
 A_terms, B_terms = filter_terms_not_in_wemodel(we_model, A_terms, B_terms)
 add_experiment_definition(exp_num, X_terms, Y_terms, A_terms, B_terms, 
@@ -141,6 +144,7 @@ B_terms = ['abuse','crash','filth','murder','sickness','accident','death','grief
           'poison','stink','assault','disaster','hatred','pollute','tragedy',
           'bomb','divorce','jail','poverty','ugly','cancer','evil','kill',
           'rotten','vomit']
+print(f'Experiment {exp_num}:')
 X_terms, Y_terms = filter_terms_not_in_wemodel(we_model, X_terms, Y_terms)
 A_terms, B_terms = filter_terms_not_in_wemodel(we_model, A_terms, B_terms)
 add_experiment_definition(exp_num, X_terms, Y_terms, A_terms, B_terms, 
@@ -163,6 +167,7 @@ Y_terms = ['Darnell', 'Hakim', 'Jermaine', 'Kareem', 'Jamal', 'Leroy', 'Rasheed'
 Y_italics = ['Tremayne', 'Latonya']
 A_terms = ['joy', 'love', 'peace', 'wonderful', 'pleasure', 'friend', 'laughter', 'happy']
 B_terms = ['agony', 'terrible', 'horrible', 'nasty', 'evil', 'war', 'awful', 'failure']
+print(f'Experiment {exp_num}:')
 X_terms, Y_terms = filter_terms_not_in_wemodel(we_model, X_terms, Y_terms)
 A_terms, B_terms = filter_terms_not_in_wemodel(we_model, A_terms, B_terms)
 add_experiment_definition(exp_num, X_terms, Y_terms, A_terms, B_terms, 
@@ -180,6 +185,7 @@ A_terms = ['executive','management','professional','corporation',
                'salary','office','business','career']
 B_terms = ['home','parents','children','family',
                'cousins','marriage','wedding','relatives']
+print(f'Experiment {exp_num}:')
 X_terms, Y_terms = filter_terms_not_in_wemodel(we_model, X_terms, Y_terms)
 A_terms, B_terms = filter_terms_not_in_wemodel(we_model, A_terms, B_terms)
 add_experiment_definition(exp_num, X_terms, Y_terms, A_terms, B_terms, 
@@ -200,6 +206,7 @@ A_terms = ['male','man','boy','brother',
               'he','him','his','son']
 B_terms = ['female','woman','girl','sister',
                'she','her','hers','daughter']
+print(f'Experiment {exp_num}:')
 X_terms, Y_terms = filter_terms_not_in_wemodel(we_model, X_terms, Y_terms)
 A_terms, B_terms = filter_terms_not_in_wemodel(we_model, A_terms, B_terms)
 add_experiment_definition(exp_num, X_terms, Y_terms, A_terms, B_terms, 
@@ -219,6 +226,7 @@ A_terms = ['brother','father','uncle','grandfather',
           'son','he','his','him']
 B_terms = ['sister','mother','aunt','grandmother',
           'daughter','she','hers','her']
+print(f'Experiment {exp_num}:')
 X_terms, Y_terms = filter_terms_not_in_wemodel(we_model, X_terms, Y_terms)
 A_terms, B_terms = filter_terms_not_in_wemodel(we_model, A_terms, B_terms)
 add_experiment_definition(exp_num, X_terms, Y_terms, A_terms, B_terms, 
@@ -236,6 +244,7 @@ Y_terms = ['sick','illness','influenza','disease','virus','cancer']
 A_terms = ['impermanent','unstable','variable','fleeting','short','brief',
           'occasional']
 B_terms = ['stable','always','constant','persistent','chronic','prolonged','forever']
+print(f'Experiment {exp_num}:')
 X_terms, Y_terms = filter_terms_not_in_wemodel(we_model, X_terms, Y_terms)
 A_terms, B_terms = filter_terms_not_in_wemodel(we_model, A_terms, B_terms)
 add_experiment_definition(exp_num, X_terms, Y_terms, A_terms, B_terms, 
@@ -251,6 +260,7 @@ X_terms = ['Tiffany', 'Michelle', 'Cindy', 'Kristy', 'Brad', 'Eric', 'Joey', 'Bi
 Y_terms = ['Ethel', 'Bernice', 'Gertrude', 'Agnes', 'Cecil', 'Wilbert', 'Mortimer', 'Edgar']
 A_terms = ['joy', 'love', 'peace', 'wonderful', 'pleasure', 'friend', 'laughter', 'happy']
 B_terms = ['agony', 'terrible', 'horrible', 'nasty', 'evil', 'war', 'awful', 'failure']
+print(f'Experiment {exp_num}:')
 X_terms, Y_terms = filter_terms_not_in_wemodel(we_model, X_terms, Y_terms)
 A_terms, B_terms = filter_terms_not_in_wemodel(we_model, A_terms, B_terms)
 add_experiment_definition(exp_num, X_terms, Y_terms, A_terms, B_terms, 
