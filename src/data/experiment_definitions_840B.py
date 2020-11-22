@@ -1,9 +1,14 @@
 from utils import save_pickle,\
-    open_pickle, filter_terms_not_in_wemodel
+   open_pickle, filter_terms_not_in_wemodel
 from collections import defaultdict
 from gensim.models import KeyedVectors
 
-EXPERIMENT_DEFINITION_PATH = '../../data/interim/experiment_definitions_test.pickle'
+MODEL_NAME = input('Please type your model name, then press ENTER. This name will be \
+appended to all filenames. For example, the experiment definitions will \
+be saved in ../../data/interim/<model_name>_experiment_definitions.pickle.\n\
+->')
+
+EXPERIMENT_DEFINITION_PATH = f'../../data/interim/{MODEL_NAME}_experiment_definitions_test.pickle'
 # This is the path from which the model is *loaded*,
 # so make sure this points to normed vectors if necessary.
 MODEL_PATH = '../../data/interim/glove_840_norm'
