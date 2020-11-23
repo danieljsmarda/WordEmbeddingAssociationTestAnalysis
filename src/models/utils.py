@@ -14,7 +14,7 @@ def open_pickle(FILEPATH):
     return obj
 
 def save_arrays(FILEPATH, exp_num, order, X_metrics, Y_metrics, threshold,
-    pct_5, pct_95, A_biases, lower_bound, upper_bound, QR_dict):
+    A_biases, QR_dict):
     results_dict = open_pickle(FILEPATH)
     results_dict[exp_num] = results_dict.get(exp_num, defaultdict(dict))
     order_dict = results_dict[exp_num].get(order, {})
