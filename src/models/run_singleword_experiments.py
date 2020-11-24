@@ -4,9 +4,9 @@ from gensim.models import KeyedVectors, Word2Vec
 # You need the next import to save a compressed glove model
 #from gensim.scripts.glove2word2vec import glove2word2vec
 
-import sys
-sys.path.append('../src')
-from models import get_2ndorder_association_metric_list_for_target_list,     get_matrices_from_term_lists,     save_arrays, open_pickle, save_pickle,     save_scalers
+from bias_calculation import get_2ndorder_association_metric_list_for_target_list, \
+    get_matrices_from_term_lists
+from utils import save_arrays, open_pickle, save_pickle, save_scalers
 
 # Here is the code used to save the model in compressed format.
 # For more technical details see the following links:
