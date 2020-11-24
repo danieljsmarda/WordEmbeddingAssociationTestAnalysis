@@ -56,7 +56,7 @@ def calculate_cosines_for_all_words_unscaled(we_model, A_mtx, B_mtx):
     # but we found that the norm-based implementation was faster.
     A_mtx_norm = A_mtx/np.linalg.norm(A_mtx, axis=1).reshape(-1,1)
     B_mtx_norm = B_mtx/np.linalg.norm(B_mtx, axis=1).reshape(-1,1)
-    all_mtx_norm = we_model.wv.vectors/np.linalg.norm(we_model.wv.vectors, axis=1).reshape(-1,1)
+    all_mtx_norm = we_model.vectors/np.linalg.norm(we_model.vectors, axis=1).reshape(-1,1)
     
     all_associations_to_A = np.dot(A_mtx_norm, all_mtx_norm.T)
     all_associations_to_B = np.dot(B_mtx_norm, all_mtx_norm.T)
