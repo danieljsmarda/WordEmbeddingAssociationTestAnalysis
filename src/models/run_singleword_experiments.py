@@ -27,7 +27,7 @@ we_model.save('../data/interim/glove_840_norm')
 # Load the model quickly.
 we_model = KeyedVectors.load('../data/interim/glove_840B_normed', mmap='r')
 print('loading done!')
-print(f'Total words: {len(we_model.wv.vocab)}')
+print(f'Total words: {len(we_model.vocab)}')
 
 EXPERIMENT_DEFINITION_PATH = '../data/interim/glove_840B_experiment_definitions.pickle'
 RESULTS_FILEPATH = '../data/interim/glove_840B_association_metric_exps.pickle'
