@@ -24,16 +24,20 @@ we_model.init_sims(replace=True)
 we_model.save('../data/interim/glove_840_norm')
 '''
 
+MODEL_NAME = input('Please type your model name, then press ENTER. This name will be \
+appended to all filenames. For example, the experiment definitions will \
+be loaded from ../../data/interim/<model_name>_experiment_definitions.pickle.\n\
+->')
+
 # Load the model quickly.
-we_model = KeyedVectors.load('../data/interim/glove_840B_normed', mmap='r')
+we_model = KeyedVectors.load(f'../data/interim/{MODEL_NAME}_normed', mmap='r')
 print('loading done!')
 print(f'Total words: {len(we_model.vocab)}')
 
-EXPERIMENT_DEFINITION_PATH = '../data/interim/glove_840B_experiment_definitions.pickle'
-RESULTS_FILEPATH = '../data/interim/glove_840B_association_metric_exps.pickle'
-SCALERS_FILEPATH = '../data/processed/glove_840B_scalers.pickle'
-THRESHOLD_BIASES_PATH_2NDORDER = '../data/processed/glove_840B_threshold_biases_2ndorder.pickle'
-THRESHOLD_BIASES_PATH_1STORDER = '../data/processed/glove_840B_threshold_biases_1storder.pickle'
+EXPERIMENT_DEFINITION_PATH = F'../data/interim/{MODEL_NAME}_experiment_definitions.pickle'
+RESULTS_FILEPATH = F'../data/interim/{MODEL_NAME}_association_metric_exps.pickle'
+SCALERS_FILEPATH = F'../data/processed/{MODEL_NAME}_scalers.pickle'
+THRESHOLD_BIASES_PATH_2NDORDER = F'../data/processed/{MODEL_NAME}_threshold_biases_2ndorder.pickle'
 
 def calculate_cosines_for_target_word_unscaled(word_vec, A_mtx, B_mtx):
     A_dot_v = np.dot(A_mtx, word_vec)
