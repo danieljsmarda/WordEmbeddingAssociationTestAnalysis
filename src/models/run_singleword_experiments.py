@@ -107,8 +107,8 @@ def run_exps_2ndorder(X_terms, Y_terms, A_terms, B_terms, exp_num):
 
     print ('mean bias to X:', np.mean(X_metrics))
     print ('mean bias to Y:', np.mean(Y_metrics))
-
     print ('Bias threshold:', _th)
+    print(f'Quantiles: {QR_dict}')
 
     # Until further notice, the `order` variable is necessary here
     # due to the structure of the dictionaries where results

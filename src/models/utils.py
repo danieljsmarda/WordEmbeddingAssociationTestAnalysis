@@ -28,6 +28,17 @@ def save_arrays(FILEPATH, exp_num, order, X_metrics, Y_metrics, threshold, QR_di
     print(f"Results array successfully saved to file {FILEPATH} under\
  keys [{exp_num}][\'{order}\']")
 
+def del_dict_entries(dct, filepath, keys=[]):
+    for key in keys:
+        if key in dct[1]['second'].keys():
+            print(f'The key \'{key}\' has been successfully deleted.')
+        else:
+            print(f'Key \'{key}\' not found in dictionary.')
+        for exp_num in range(1,11):
+            dct[exp_num]['second'].pop(key, None)
+    save_pickle(dct, filepath)
+    print(f'The new dictionary has been successfully saved to {filepath}')
+
 def save_experiment_arbitrary_label(filepath, exp_num, order, label, data, display=None):
     results_dict = open_pickle(filepath)
     results_dict[exp_num] = results_dict.get(exp_num, defaultdict(dict))
