@@ -67,6 +67,7 @@ def add_quantile_ranges_to_dict(dct, biases):
     dct['QR_95'] = [np.percentile(biases, 2.5), np.percentile(biases, 97.5)]
     dct['QR_99'] = [np.percentile(biases, 0.5), np.percentile(biases, 99.5)]
     dct['QR_99.9'] = [np.percentile(biases, 0.05), np.percentile(biases, 99.95)]
+    return dct
 
 
 def get_2ndorder_association_metric_list_for_target_list(target_list, A_terms, B_terms, we_model, exp_num):
