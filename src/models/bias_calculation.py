@@ -35,24 +35,6 @@ def calculate_association_metric_for_target_word(word_vec, A_mtx, B_mtx):
     B_cosines = np.divide(B_dot_v, B_norms)
     return np.mean(A_cosines) - np.mean(B_cosines)
 
-def get_2ndorder_association_metric_list_for_target_list(target_list, A_terms, B_terms, we_model):
-    global ORDER
-    ORDER = 'second'
-    
-    [X_mtx, _, A_mtx, B_mtx] = get_matrices_from_term_lists(we_model, target_list, target_list, A_terms, B_terms)
-    associations = np.apply_along_axis(lambda x_vec: calculate_association_metric_for_target_word(x_vec, A_mtx, B_mtx), 1, X_mtx)
-    
-    all_words_mtx = we_model.wv.vectors
-    all_associations = np.array([])
-    for x_vec in tqdm(all_words_mtx, desc='Getting association metric for all words'):
-        metric = calculate_association_metric_for_target_word(x_vec, A_mtx, B_mtx)
-        all_associations = np.append(all_associations, metric)
-    
-    scaler = MinMaxScaler(feature_range=(-1,1))
-    scaler.fit(all_associations.reshape(-1,1)) # Reshape is for a single feature, NOT for a single sample
-    transformed = scaler.transform(associations.reshape(-1,1))
-    return transformed.reshape(len(transformed))
-
 def calculate_effect_size(X_mtx, Y_mtx, A_mtx, B_mtx):
     '''Computes the effect size.
     X_mtx, Y_mtx, A_mtx, B_mtx: 2-D word vector arrays.'''

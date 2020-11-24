@@ -17,7 +17,7 @@ from utils import save_arrays, open_pickle, save_pickle, save_scalers
 # Directly loading the we_model from the .txt file takes 10-15 minutes on a laptop.
 # Loading the `norm` file takes less than 1 minute.
 '''
-glove_file = '../data/external/glove.840B.300d/glove.840B.300d.txt'
+glove_file = '../../data/external/glove.840B.300d/glove.840B.300d.txt'
 _ = glove2word2vec(glove_file, '../data/interim/glove_840_tmp.txt')
 we_model = KeyedVectors.load_word2vec_format('../data/interim/glove_840_tmp.txt')
 we_model.init_sims(replace=True)
@@ -30,14 +30,14 @@ be loaded from ../../data/interim/<model_name>_experiment_definitions.pickle.\n\
 ->')
 
 # Load the model quickly.
-we_model = KeyedVectors.load(f'../data/interim/{MODEL_NAME}_normed', mmap='r')
+we_model = KeyedVectors.load(f'../../data/interim/{MODEL_NAME}_normed', mmap='r')
 print('loading done!')
 print(f'Total words: {len(we_model.vocab)}')
 
-EXPERIMENT_DEFINITION_PATH = F'../data/interim/{MODEL_NAME}_experiment_definitions.pickle'
-RESULTS_FILEPATH = F'../data/interim/{MODEL_NAME}_association_metric_exps.pickle'
-SCALERS_FILEPATH = F'../data/processed/{MODEL_NAME}_scalers.pickle'
-THRESHOLD_BIASES_PATH_2NDORDER = F'../data/processed/{MODEL_NAME}_threshold_biases_2ndorder.pickle'
+EXPERIMENT_DEFINITION_PATH = f'../../data/interim/{MODEL_NAME}_experiment_definitions.pickle'
+RESULTS_FILEPATH = f'../../data/interim/{MODEL_NAME}_association_metric_exps.pickle'
+SCALERS_FILEPATH = f'../../data/processed/{MODEL_NAME}_scalers.pickle'
+THRESHOLD_BIASES_PATH_2NDORDER = f'../../data/processed/{MODEL_NAME}_threshold_biases_2ndorder.pickle'
 
 def calculate_cosines_for_target_word_unscaled(word_vec, A_mtx, B_mtx):
     A_dot_v = np.dot(A_mtx, word_vec)
@@ -111,6 +111,9 @@ def run_exps_2ndorder(X_terms, Y_terms, A_terms, B_terms, exp_num):
 
     print ('Bias threshold', _th)
 
+    # Until further notice, the `order` variable is necessary here
+    # due to the structure of the dictionaries where results
+    # are saved.
     order = 'second'
     threshold = _th
     save_arrays(RESULTS_FILEPATH, exp_num, order, X_metrics, Y_metrics, threshold, QR_dict)
