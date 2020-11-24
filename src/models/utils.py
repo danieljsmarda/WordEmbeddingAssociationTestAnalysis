@@ -26,7 +26,7 @@ def save_arrays(FILEPATH, exp_num, order, X_metrics, Y_metrics, threshold, QR_di
     results_dict[exp_num][order] = order_dict
     save_pickle(results_dict, FILEPATH)
     print(f"Results array successfully saved to file {FILEPATH} under\
- keys [{exp_num}][{order}]")
+ keys [{exp_num}][\'{order}\']")
 
 def save_experiment_arbitrary_label(filepath, exp_num, order, label, data, display=None):
     results_dict = open_pickle(filepath)

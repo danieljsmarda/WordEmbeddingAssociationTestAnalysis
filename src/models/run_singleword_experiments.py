@@ -102,13 +102,13 @@ def get_2ndorder_association_metric_list_for_target_list(target_list, A_terms, B
 def run_exps_2ndorder(X_terms, Y_terms, A_terms, B_terms, exp_num):
     X_metrics, _th, QR_dict = get_2ndorder_association_metric_list_for_target_list(X_terms, A_terms, B_terms, we_model, exp_num)
     Y_metrics, _th, QR_dict = get_2ndorder_association_metric_list_for_target_list(Y_terms, A_terms, B_terms, we_model, exp_num)
-    print (X_metrics)
-    print (Y_metrics)
+    print (f'X_metrics: {X_metrics}')
+    print (f'Y_metrics: {Y_metrics}')
 
-    print ('mean bias to X', np.mean(X_metrics))
-    print ('mean bias to Y', np.mean(Y_metrics))
+    print ('mean bias to X:', np.mean(X_metrics))
+    print ('mean bias to Y:', np.mean(Y_metrics))
 
-    print ('Bias threshold', _th)
+    print ('Bias threshold:', _th)
 
     # Until further notice, the `order` variable is necessary here
     # due to the structure of the dictionaries where results
