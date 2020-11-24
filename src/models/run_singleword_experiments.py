@@ -4,8 +4,7 @@ from gensim.models import KeyedVectors, Word2Vec
 # You need the next import to save a compressed glove model
 #from gensim.scripts.glove2word2vec import glove2word2vec
 
-from bias_calculation import get_2ndorder_association_metric_list_for_target_list, \
-    get_matrices_from_term_lists
+from bias_calculation import get_matrices_from_term_lists
 from utils import save_arrays, open_pickle, save_pickle, save_scalers
 
 # Here is the code used to save the model in compressed format.
@@ -77,7 +76,6 @@ def get_2ndorder_association_metric_list_for_target_list(target_list, A_terms, B
     # A_associations, B_associations are associations for all words    
     A_associations, B_associations = calculate_cosines_for_all_words_unscaled(we_model, A_mtx, B_mtx)
     
-    
     all_associations = np.concatenate((A_associations, B_associations))
     scaler = MinMaxScaler(feature_range=(0,1))
     scaler.fit(all_associations.reshape(-1,1))
@@ -101,8 +99,8 @@ def get_2ndorder_association_metric_list_for_target_list(target_list, A_terms, B
     return np.array(target_biases), _th, QR_dict
 
 def run_exps_2ndorder(X_terms, Y_terms, A_terms, B_terms, exp_num):
-    X_metrics, _th, A_biases, QR_dict = get_2ndorder_association_metric_list_for_target_list(X_terms, A_terms, B_terms, we_model, exp_num)
-    Y_metrics, _th, A_biases, QR_dict = get_2ndorder_association_metric_list_for_target_list(Y_terms, A_terms, B_terms, we_model, exp_num)
+    X_metrics, _th, QR_dict = get_2ndorder_association_metric_list_for_target_list(X_terms, A_terms, B_terms, we_model, exp_num)
+    Y_metrics, _th, QR_dict = get_2ndorder_association_metric_list_for_target_list(Y_terms, A_terms, B_terms, we_model, exp_num)
     print (X_metrics)
     print (Y_metrics)
 
