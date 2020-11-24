@@ -24,7 +24,7 @@ we_model.init_sims(replace=True)
 we_model.save('../data/interim/glove_840_norm')
 '''
 
-# Glove model fast load
+# Load the model quickly.
 we_model = KeyedVectors.load('../data/interim/glove_840B_normed', mmap='r')
 print('loading done!')
 print(f'Total words: {len(we_model.wv.vocab)}')

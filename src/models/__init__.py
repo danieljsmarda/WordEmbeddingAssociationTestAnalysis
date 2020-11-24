@@ -1,2 +1,2 @@
-from .effect_size import *
+from .bias_calculation import *
 from .utils import *
