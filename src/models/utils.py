@@ -25,7 +25,7 @@ def save_arrays(FILEPATH, exp_num, order, X_metrics, Y_metrics, threshold, QR_di
     order_dict['QR_dict'] = QR_dict
     results_dict[exp_num][order] = order_dict
     save_pickle(results_dict, FILEPATH)
-    print(f"Results array successfully saved to file {FILEPATH} under\
+    print(f"Results successfully saved to file {FILEPATH} under\
  keys [{exp_num}][\'{order}\']")
 
 def del_dict_entries(dct, filepath, keys=[]):
@@ -51,8 +51,8 @@ def save_experiment_arbitrary_label(filepath, exp_num, order, label, data, displ
     elif display == 'some':
         print(f'SPECIFIC RESULTS FOR EXP {exp_num}, LABEL "{label}": \
         {results_dict[exp_num][order][label]}')
-    print(f"Results array successfully saved to file {filepath} under\
-    keys [{exp_num}][\'{order}\'][{label}]")
+    print(f"Results successfully saved to file {filepath} under\
+    keys [{exp_num}][\'{order}\'][\'{label}\']")
 
 def save_scalers(filepath, exp_num, order, scaler): 
     results_dict = open_pickle(filepath)
