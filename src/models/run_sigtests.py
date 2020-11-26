@@ -131,5 +131,5 @@ if __name__ == '__main__':
     if rerun not in ['y','n']:
         print('Invalid answer. Please rerun and enter either "y" or "n".')
     elif rerun=='y':
-        n_samples = input('How many samples?\n->')
+        n_samples = int(input('How many samples?\n->'))
     run_all_sigtests(rerun, n_samples)
