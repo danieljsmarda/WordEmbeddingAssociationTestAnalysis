@@ -96,6 +96,7 @@ def get_n_test_stats(wv_obj, X_terms, Y_terms, A_terms, B_terms, n_samples=100):
 def run_all_sigtests(new_dists=False, n_samples=100):
     #TODO: refactor: remove 'order' argument, no longer necessary
     exps = open_pickle(EXPERIMENT_DEFINITION_PATH)
+    results_dict = open_pickle(RESULTS_FILEPATH)
     for exp_num, exp in exps.items():
         print('******************************')
         print(f'Experiment: {exp_num}')
