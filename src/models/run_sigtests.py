@@ -22,7 +22,7 @@ we_model = KeyedVectors.load(f'../../data/interim/{MODEL_NAME}_norm', mmap='r')
 
 
 # Fastest version, 10000 samples -> 1 minute per experiment
-def get_test_stat(wv_obj, X_terms, Y_terms, A_terms, B_terms):  
+def get_test_stat(we_model, X_terms, Y_terms, A_terms, B_terms):  
     [X_mtx, Y_mtx, A_mtx, B_mtx] = get_matrices_from_term_lists(we_model, X_terms, Y_terms, A_terms, B_terms)
     cosine_sim_XA = cosine_similarity(X_mtx, A_mtx)
     cosine_sim_XB = cosine_similarity(X_mtx, B_mtx)
