@@ -19,9 +19,9 @@ appended to all filenames. For example, the experiment definitions will \
 be loaded from ../../data/interim/<model_name>_experiment_definitions.pickle.\n\
 ->')
 MODEL_NAME = 'glove_840B'
-RESULTS_FILEPATH = f'../data/interim/{MODEL_NAME}_association_metric_exps.pickle'
-EXPERIMENT_DEFINITION_PATH = f'../data/interim/{MODEL_NAME}_experiment_definitions.pickle'
-we_model = KeyedVectors.load(f'../data/interim/{MODEL_NAME}_norm', mmap='r')
+RESULTS_FILEPATH = f'../../data/interim/{MODEL_NAME}_association_metric_exps.pickle'
+EXPERIMENT_DEFINITION_PATH = f'../../data/interim/{MODEL_NAME}_experiment_definitions.pickle'
+we_model = KeyedVectors.load(f'../../data/interim/{MODEL_NAME}_norm', mmap='r')
 
 
 # # Generating Distributions
