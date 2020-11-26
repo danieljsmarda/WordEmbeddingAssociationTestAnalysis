@@ -98,6 +98,8 @@ def run_all_sigtests(new_dists=False, n_samples=100):
     #TODO: refactor: remove 'order' argument, no longer necessary
     exps = open_pickle(EXPERIMENT_DEFINITION_PATH)
     results_dict = open_pickle(RESULTS_FILEPATH)
+    # `order` variable only necessary for saving files.
+    order = 'second'
     for exp_num, exp in exps.items():
         print('******************************')
         print(f'Experiment: {exp_num}')
