@@ -58,15 +58,6 @@ def calculate_association_metric_for_target_word(word_vec, A_mtx, B_mtx):
     B_cosines = np.divide(B_dot_v, B_norms)
     return np.mean(A_cosines) - np.mean(B_cosines)
 
-'''
-for i in tqdm(range(10000)):
-    [X_mtx, Y_mtx, A_mtx, B_mtx] = get_matrices_from_term_lists(we_model, X_terms, Y_terms, A_terms, B_terms)
-    X_associations = np.apply_along_axis(lambda x_vec: calculate_association_metric_for_target_word(x_vec, A_mtx, B_mtx), 1, X_mtx)
-    Y_associations = np.apply_along_axis(lambda y_vec: calculate_association_metric_for_target_word(y_vec, A_mtx, B_mtx), 1, Y_mtx)
-    m = np.mean(X_associations) - np.mean(Y_associations)
-'''
-
-
 def get_n_test_stats(wv_obj, X_terms, Y_terms, A_terms, B_terms, n_samples=100):
     sigtest_dist_1 = []
     sigtest_dist_2 = []
