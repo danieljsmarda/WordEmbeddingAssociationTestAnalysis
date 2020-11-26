@@ -3,13 +3,11 @@ from scipy.stats import norm
 from tqdm import tqdm
 from gensim.models import KeyedVectors
 from sklearn.metrics.pairwise import cosine_similarity
-from collections import defaultdict
 import random
 random.seed(5)
 from bias_calculation import get_matrices_from_term_lists
-from utils import save_pickle, open_pickle, \
-    save_experiment_arbitrary_label, \
-    del_dict_entries
+from utils import open_pickle, \
+    save_experiment_arbitrary_label
 
 MODEL_NAME = input('Please type your model name, then press ENTER. This name will be \
 appended to all filenames. For example, the experiment definitions will \
