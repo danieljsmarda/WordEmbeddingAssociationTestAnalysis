@@ -52,7 +52,7 @@ def save_experiment_arbitrary_label(filepath, exp_num, order, label, data, displ
         print(f'SPECIFIC RESULTS FOR EXP {exp_num}, LABEL "{label}": \
         {results_dict[exp_num][order][label]}')
     print(f"Results successfully saved to file {filepath} under\
-    keys [{exp_num}][\'{order}\'][\'{label}\']")
+keys [{exp_num}][\'{order}\'][\'{label}\']")
 
 def save_scalers(filepath, exp_num, order, scaler): 
     results_dict = open_pickle(filepath)
