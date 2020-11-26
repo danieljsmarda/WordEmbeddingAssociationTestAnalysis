@@ -7,8 +7,6 @@ from sklearn.metrics.pairwise import cosine_similarity
 from collections import defaultdict
 import random
 random.seed(5)
-import sys
-sys.path.append('../src')
 from bias_calculation import get_matrices_from_term_lists
 from utils import save_pickle, open_pickle, \
     save_experiment_arbitrary_label, \
