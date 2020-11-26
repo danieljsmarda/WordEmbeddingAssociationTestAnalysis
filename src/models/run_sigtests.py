@@ -63,7 +63,6 @@ def get_n_test_stats(wv_obj, X_terms, Y_terms, A_terms, B_terms, n_samples=100):
     sigtest_dist_2 = []
     sigtest_dist_3 = []
     n_targets = len(X_terms)
-    n_attributes = len(A_terms)
     assert len(X_terms) == len(Y_terms), "Target list lengths are unequal."
     assert len(A_terms) == len(B_terms), "Attribute list lengths are unequal."
     vocab_list = list(wv_obj.vocab)
