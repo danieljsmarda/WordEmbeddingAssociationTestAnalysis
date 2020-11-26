@@ -21,7 +21,7 @@ EXPERIMENT_DEFINITION_PATH = f'../../data/interim/{MODEL_NAME}_experiment_defini
 we_model = KeyedVectors.load(f'../../data/interim/{MODEL_NAME}_norm', mmap='r')
 
 
-# Fastest version, 10000 words -> 1 minute
+# Fastest version, 10000 samples -> 1 minute per experiment
 def get_test_stat(wv_obj, X_terms, Y_terms, A_terms, B_terms):  
     [X_mtx, Y_mtx, A_mtx, B_mtx] = get_matrices_from_term_lists(we_model, X_terms, Y_terms, A_terms, B_terms)
     cosine_sim_XA = cosine_similarity(X_mtx, A_mtx)
@@ -40,9 +40,12 @@ def get_test_stat(wv_obj, X_terms, Y_terms, A_terms, B_terms):
     return test_stat
 
 
-# This cell works too. It takes twice as long as the cell above,
-# but if we want to try to vectorize the outer loop, then 
-# we will probably have to use this version
+# This function has the same purpose as get_test_stat. 
+# Between this function and get_test stat, get_test_stat is faster
+# and so get_test_stat is used in the rest of the code. However,
+# an even faster version could be implemented by further vectorizing
+# these operations with an additional dimension added to the arrays
+# corresponding to n_samples.
 def calculate_association_metric_for_target_word(word_vec, A_mtx, B_mtx):
     '''Computes the association metric, s(w,A,B).
     word_vec: 1-D word vector
@@ -110,7 +113,7 @@ def run_all_sigtests(new_dists=False, n_samples=100):
 if __name__ == '__main__':
     n_samples = None
     rerun = input('Do you want to calculate new samples? Caution: \
-This will overwrite previously-calculated samples. (y/n)\n->')
+Unless you typed a different model name, this will overwrite previously-calculated samples. (y/n)\n->')
     if rerun not in ['y','n']:
         print('Invalid answer. Please rerun and enter either "y" or "n".')
     elif rerun=='y':
