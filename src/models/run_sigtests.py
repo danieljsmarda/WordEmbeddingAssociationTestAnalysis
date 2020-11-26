@@ -43,7 +43,6 @@ def get_test_stat(wv_obj, X_terms, Y_terms, A_terms, B_terms):
     s_for_Y_words = mean_over_Ya - mean_over_Yb
     test_stat = np.mean(s_for_X_words) - np.mean(s_for_Y_words)
     return test_stat
-#get_test_stat(we_model, X_terms, Y_terms, A_terms, B_terms)
 
 
 # This cell works too. It takes twice as long as the cell above,
@@ -88,7 +87,6 @@ def get_n_test_stats(wv_obj, X_terms, Y_terms, A_terms, B_terms, n_samples=100):
         sigtest_dist_3.append(get_test_stat(wv_obj, Y_terms, X_sample, A_terms, B_terms))
         #sigtest_dist_3.append(get_test_stat(wv_obj, X_sample, Y_terms, A_terms, B_terms))
     return np.array(sigtest_dist_1), np.array(sigtest_dist_2), np.array(sigtest_dist_3)
-#a,b,c = get_n_test_stats(we_model, X_terms, Y_terms, A_terms, B_terms)
 
 
 # Reminder that if you run this cell with a lower number of n_samples, 
@@ -125,5 +123,4 @@ def run_all_sigtests(new_dists=False, n_samples=100):
 
 
 if __name__ == '__main__':
-
     run_all_sigtests()
