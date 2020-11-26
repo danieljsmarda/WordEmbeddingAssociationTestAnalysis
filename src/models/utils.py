@@ -29,6 +29,10 @@ def save_arrays(FILEPATH, exp_num, order, X_metrics, Y_metrics, threshold, QR_di
  keys [{exp_num}][\'{order}\']")
 
 def del_dict_entries(dct, filepath, keys=[]):
+    '''This function is a helper function for developers, not used
+    elsewhere in the code. It was added because data is currently
+    only appended to the data dictionaries. This function
+    can be called to delete entries from the results dictionary.'''
     for key in keys:
         if key in dct[1]['second'].keys():
             print(f'The key \'{key}\' has been successfully deleted.')
