@@ -1,8 +1,7 @@
 import numpy as np
 from scipy.stats import norm
 from tqdm import tqdm
-from gensim.models import KeyedVectors, Word2Vec
-from gensim.scripts.glove2word2vec import glove2word2vec
+from gensim.models import KeyedVectors
 from sklearn.metrics.pairwise import cosine_similarity
 from collections import defaultdict
 import random
@@ -110,7 +109,7 @@ def run_all_sigtests(new_dists=False, n_samples=100):
 
 if __name__ == '__main__':
     n_samples = None
-    rerun = input('Do you want to calculate new samples? Caution:\
+    rerun = input('Do you want to calculate new samples? Caution: \
 This will overwrite previously-calculated samples. (y/n)\n->')
     if rerun not in ['y','n']:
         print('Invalid answer. Please rerun and enter either "y" or "n".')
