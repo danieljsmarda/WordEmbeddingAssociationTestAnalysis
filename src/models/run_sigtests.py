@@ -126,4 +126,10 @@ def run_all_sigtests(new_dists=False, n_samples=100):
 
 
 if __name__ == '__main__':
-    run_all_sigtests()
+    n_samples = None
+    rerun = input('Do you want to calculate new samples? (y/n)\n->')
+    if rerun not in ['y','n']:
+        print('Invalid answer. Please rerun and enter either "y" or "n".')
+    elif rerun=='y':
+        n_samples = input('How many samples?\n->')
+    run_all_sigtests(rerun, n_samples)
