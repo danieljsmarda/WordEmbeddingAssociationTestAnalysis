@@ -24,12 +24,7 @@ EXPERIMENT_DEFINITION_PATH = f'../../data/interim/{MODEL_NAME}_experiment_defini
 we_model = KeyedVectors.load(f'../../data/interim/{MODEL_NAME}_norm', mmap='r')
 
 
-# # Generating Distributions
-
 # Fastest version, 10000 words -> 1 minute
-# (Possible TODO) May be able to add minimal speedup with itemgetter 
-# (see https://stackoverflow.com/questions/18453566/python-dictionary-get-list-of-values-for-list-of-keys)
-# to speed up creation of word matrices in get_matrices_from_term_lists
 def get_test_stat(wv_obj, X_terms, Y_terms, A_terms, B_terms):  
     [X_mtx, Y_mtx, A_mtx, B_mtx] = get_matrices_from_term_lists(we_model, X_terms, Y_terms, A_terms, B_terms)
     cosine_sim_XA = cosine_similarity(X_mtx, A_mtx)
@@ -92,10 +87,7 @@ def get_n_test_stats(wv_obj, X_terms, Y_terms, A_terms, B_terms, n_samples=100):
     return np.array(sigtest_dist_1), np.array(sigtest_dist_2), np.array(sigtest_dist_3)
 
 
-# Reminder that if you run this cell with a lower number of n_samples, 
-# It will overwrite what's currently in the dictionary
 def run_all_sigtests(new_dists=False, n_samples=100):
-    #TODO: refactor: remove 'order' argument, no longer necessary
     exps = open_pickle(EXPERIMENT_DEFINITION_PATH)
     results_dict = open_pickle(RESULTS_FILEPATH)
     # `order` variable only necessary for saving files.
@@ -129,7 +121,8 @@ def run_all_sigtests(new_dists=False, n_samples=100):
 
 if __name__ == '__main__':
     n_samples = None
-    rerun = input('Do you want to calculate new samples? (y/n)\n->')
+    rerun = input('Do you want to calculate new samples? Caution:\
+This will overwrite previously-calculated samples. (y/n)\n->')
     if rerun not in ['y','n']:
         print('Invalid answer. Please rerun and enter either "y" or "n".')
     elif rerun=='y':
