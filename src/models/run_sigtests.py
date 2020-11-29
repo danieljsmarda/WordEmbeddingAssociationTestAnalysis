@@ -112,7 +112,8 @@ if __name__ == '__main__':
     rerun = input('Do you want to calculate new samples? Caution: \
 Unless you typed a different model name, this will overwrite previously-calculated samples. (y/n)\n->')
     if rerun not in ['y','n']:
-        print('Invalid answer. Please rerun and enter either "y" or "n".')
+        print('Invalid answer. Please rerun and enter either "y" or "n". If "n", metrics will\
+be calculated on existing samples.')
     elif rerun=='y':
         n_samples = int(input('How many samples?\n->'))
     run_all_sigtests(rerun, n_samples)
