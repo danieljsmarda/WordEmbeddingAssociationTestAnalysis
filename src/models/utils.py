@@ -2,18 +2,21 @@ import pickle
 import numpy as np
 from collections import defaultdict
 
-def save_pickle(obj, FILEPATH):
-    f = open(FILEPATH, 'wb')
+def save_pickle(obj, filepath):
+    '''Save obj to the specified filepath.'''
+    f = open(filepath, 'wb')
     pickle.dump(obj, f)
     f.close()
 
-def open_pickle(FILEPATH):
-    f = open(FILEPATH, 'rb')
+def open_pickle(filepath):
+    '''Get obj from the specified filepath.'''
+    f = open(filepath, 'rb')
     obj = pickle.load(f)
     f.close()
     return obj
 
 def save_arrays(FILEPATH, exp_num, order, X_metrics, Y_metrics, threshold, QR_dict):
+    '''Primary save function for the results of the single-word experiments.'''
     results_dict = open_pickle(FILEPATH)
     results_dict[exp_num] = results_dict.get(exp_num, defaultdict(dict))
     order_dict = results_dict[exp_num].get(order, {})
@@ -44,6 +47,9 @@ def del_dict_entries(dct, filepath, keys=[]):
     print(f'The new dictionary has been successfully saved to {filepath}')
 
 def save_experiment_arbitrary_label(filepath, exp_num, order, label, data, display=None):
+    '''This function serves a similar purpose as save_arrays. However,
+    save_arrays is specific to saving the results of the single-word experiments.
+    This function allows saving of any result.'''
     results_dict = open_pickle(filepath)
     results_dict[exp_num] = results_dict.get(exp_num, defaultdict(dict))
     order_dict = results_dict[exp_num].get(order, {})
@@ -59,6 +65,8 @@ def save_experiment_arbitrary_label(filepath, exp_num, order, label, data, displ
 keys [{exp_num}][\'{order}\'][\'{label}\']")
 
 def save_scalers(filepath, exp_num, order, scaler): 
+    '''This function was specifically written to save MinMaxScalers
+    used in the single-word experiments.'''
     results_dict = open_pickle(filepath)
     results_dict[exp_num] = results_dict.get(exp_num, defaultdict(dict))
     results_dict[exp_num][order] = scaler
