@@ -56,6 +56,16 @@ def get_n_test_stats(wv_obj, X_terms, Y_terms, A_terms, B_terms, n_samples=100):
         #sigtest_dist_3.append(get_test_stat(wv_obj, X_sample, Y_terms, A_terms, B_terms))
     return np.array(sigtest_dist_1), np.array(sigtest_dist_2), np.array(sigtest_dist_3)
 
+def save_sigtest_pvalues(dists, exp_num, test_statistic):
+    pvalues = {}
+    for i in range(3):
+        dist = dists[i]
+        loc = np.mean(dist)
+        scale = np.std(dist, ddof=1)
+        p = norm.cdf(test_statistic, loc=loc, scale=scale)
+        pvalues[f'sigtest_{i+1}'] = p
+    save_experiment_arbitrary_label(RESULTS_FILEPATH, exp_num, 'second', 'sigtest_pvalues', pvalues)
+
 def save_errorbar_values(dists, exp_num):
     '''This function calculates the error bar values that will be plotted.
     These values are the size of the errorbar in each direction.
@@ -92,12 +102,12 @@ def run_all_sigtests(new_dists=False, n_samples=100):
         A_terms = exp['A_terms']
         B_terms = exp['B_terms']
         
-        comparison_statistic = get_test_stat(we_model, X_terms, Y_terms, A_terms, B_terms)
+        test_statistic = get_test_stat(we_model, X_terms, Y_terms, A_terms, B_terms)
         if new_dists:
             dist_1, dist_2, dist_3 = get_n_test_stats(we_model, X_terms, Y_terms, A_terms, B_terms, n_samples=n_samples)
         else:
             dist_1, dist_2, dist_3 = [results_dict[exp_num][order][f'sigtest_dist_{n}'] for n in [1,2,3]]
-        p_value = norm.cdf(comparison_statistic, loc=np.mean(dist_1), scale=np.std(dist_1))
+        p_value = norm.cdf(test_statistic, loc=np.mean(dist_1), scale=np.std(dist_1))
   
         save_experiment_arbitrary_label(RESULTS_FILEPATH, exp_num, order,
                                         'sigtest_dist_1', dist_1)
@@ -106,7 +116,7 @@ def run_all_sigtests(new_dists=False, n_samples=100):
         save_experiment_arbitrary_label(RESULTS_FILEPATH, exp_num, order,
                                         'sigtest_dist_3', dist_3)
         save_experiment_arbitrary_label(RESULTS_FILEPATH, exp_num, order,
-                                        'test_statistic', comparison_statistic)
+                                        'test_statistic', test_statistic)
         save_experiment_arbitrary_label(RESULTS_FILEPATH, exp_num, order,
                                         'ST1_p-value', p_value)
         save_errorbar_values([dist_1, dist_2, dist_3], exp_num)
