@@ -84,7 +84,6 @@ def save_errorbar_values(dists, exp_num):
             scale = np.std(dist, ddof=1)
             interval_pct = float(interval_size)/100
             err = loc - norm.ppf((1-interval_pct)/2, loc=loc, scale=scale)
-            print('ERROR', err)
             errors[f'sigtest_{i+1}'][interval_size] = err
     # The 'second' argument is necessary for saving
     save_experiment_arbitrary_label(RESULTS_FILEPATH, exp_num, 'second', 'errorbar_values', errors)
