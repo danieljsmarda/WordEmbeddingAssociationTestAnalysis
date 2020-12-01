@@ -119,6 +119,7 @@ def run_all_sigtests(new_dists=False, n_samples=100):
         save_experiment_arbitrary_label(RESULTS_FILEPATH, exp_num, order,
                                         'ST1_p-value', p_value)
         save_errorbar_values([dist_1, dist_2, dist_3], exp_num)
+        save_sigtest_pvalues([dist_1, dist_2, dist_3], exp_num, test_statistic)
 
 
 if __name__ == '__main__':
