@@ -3,6 +3,7 @@ from scipy.stats import norm
 from tqdm import tqdm
 from gensim.models import KeyedVectors
 from sklearn.metrics.pairwise import cosine_similarity
+from collections import defaultdict
 import random
 random.seed(5)
 from bias_calculation import get_matrices_from_term_lists
@@ -55,6 +56,27 @@ def get_n_test_stats(wv_obj, X_terms, Y_terms, A_terms, B_terms, n_samples=100):
         #sigtest_dist_3.append(get_test_stat(wv_obj, X_sample, Y_terms, A_terms, B_terms))
     return np.array(sigtest_dist_1), np.array(sigtest_dist_2), np.array(sigtest_dist_3)
 
+def save_errorbar_values(dists, exp_num):
+    '''This function calculates the error bar values that will be plotted.
+    These values are the size of the errorbar in each direction.
+    They are meant to be passed to the matplotlib function 
+    ax.errorbar.
+    dists -- list of 3 sigtest dists
+    exp_num -- int
+    Returns None, but saves the numbers to the results file.'''
+
+    errors = defaultdict(dict)
+    intervals = ['95', '99', '99.9']
+    for interval_size in intervals:
+        for i in range(3):
+            dist = dists[i]
+            loc = np.mean(dist)
+            scale = np.std(dist, ddof=1)
+            interval_pct = float(interval_size)/100
+            err = loc - norm.ppf((1-interval_pct)/2, loc=loc, scale=scale)
+            errors[f'sigtest_{i+1}'][interval_size] = err
+    # The 'second' argument is necessary for saving
+    save_experiment_arbitrary_label(RESULTS_FILEPATH, exp_num, 'second', 'errobar_values', errors)
 
 def run_all_sigtests(new_dists=False, n_samples=100):
     exps = open_pickle(EXPERIMENT_DEFINITION_PATH)
@@ -86,10 +108,11 @@ def run_all_sigtests(new_dists=False, n_samples=100):
                                         'test_statistic', comparison_statistic)
         save_experiment_arbitrary_label(RESULTS_FILEPATH, exp_num, order,
                                         'ST1_p-value', p_value)
+        save_errorbar_values([dist_1, dist_2, dist_3], exp_num)
 
 
 if __name__ == '__main__':
-    n_samples = None
+    n_samples = 0
     rerun = input('Do you want to calculate new samples? Caution: \
 Unless you typed a different model name, this will overwrite previously-calculated samples. (y/n)\n->')
     if rerun not in ['y','n']:
@@ -97,7 +120,8 @@ Unless you typed a different model name, this will overwrite previously-calculat
 be calculated on existing samples.')
     elif rerun=='y':
         n_samples = int(input('How many samples?\n->'))
-    run_all_sigtests(rerun, n_samples)
+    rerun_bool = True if rerun=='y' else False
+    run_all_sigtests(rerun_bool, n_samples)
 
 
 ##### Old/Extraneous Code #####
