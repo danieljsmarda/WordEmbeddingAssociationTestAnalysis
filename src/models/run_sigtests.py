@@ -53,6 +53,9 @@ def get_n_test_stats(wv_obj, X_terms, Y_terms, A_terms, B_terms, n_samples=100):
         sigtest_dist_1.append(get_test_stat(wv_obj, X_sample, Y_sample, A_terms, B_terms))
         sigtest_dist_2.append(get_test_stat(wv_obj, X_terms, Y_sample, A_terms, B_terms))
         sigtest_dist_3.append(get_test_stat(wv_obj, Y_terms, X_sample, A_terms, B_terms))
+        # If the following line is used, we expect ST2 and 3 means to be roughly
+        # the same on visualizations. If the line above is used, we expect them to be
+        # roughly mirror images.
         #sigtest_dist_3.append(get_test_stat(wv_obj, X_sample, Y_terms, A_terms, B_terms))
     return np.array(sigtest_dist_1), np.array(sigtest_dist_2), np.array(sigtest_dist_3)
 
