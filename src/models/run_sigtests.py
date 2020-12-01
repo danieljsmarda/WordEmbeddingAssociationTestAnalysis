@@ -37,25 +37,6 @@ def get_test_stat(we_model, X_terms, Y_terms, A_terms, B_terms):
     test_stat = np.mean(s_for_X_words) - np.mean(s_for_Y_words)
     return test_stat
 
-
-# This function has the same purpose as get_test_stat. 
-# Between this function and get_test stat, get_test_stat is faster
-# and so get_test_stat is used in the rest of the code. However,
-# an even faster version could be implemented by further vectorizing
-# these operations with an additional dimension added to the arrays
-# corresponding to n_samples.
-def calculate_association_metric_for_target_word(word_vec, A_mtx, B_mtx):
-    '''Computes the association metric, s(w,A,B).
-    word_vec: 1-D word vector
-    A_mtx, B_mtx: 2-D word vector arrays'''
-    A_dot_v = np.dot(A_mtx, word_vec)
-    B_dot_v = np.dot(B_mtx, word_vec)
-    A_norms = np.multiply(np.linalg.norm(A_mtx, axis=1), np.linalg.norm(word_vec))
-    B_norms = np.multiply(np.linalg.norm(B_mtx, axis=1), np.linalg.norm(word_vec))
-    A_cosines = np.divide(A_dot_v, A_norms)
-    B_cosines = np.divide(B_dot_v, B_norms)
-    return np.mean(A_cosines) - np.mean(B_cosines)
-
 def get_n_test_stats(wv_obj, X_terms, Y_terms, A_terms, B_terms, n_samples=100):
     sigtest_dist_1 = []
     sigtest_dist_2 = []
@@ -117,3 +98,23 @@ be calculated on existing samples.')
     elif rerun=='y':
         n_samples = int(input('How many samples?\n->'))
     run_all_sigtests(rerun, n_samples)
+
+
+##### Old/Extraneous Code #####
+# This function has the same purpose as get_test_stat. 
+# Between this function and get_test stat, get_test_stat is faster
+# and so get_test_stat is used in the rest of the code. However,
+# an even faster version could be implemented by further vectorizing
+# these operations with an additional dimension added to the arrays
+# corresponding to n_samples.
+def calculate_association_metric_for_target_word(word_vec, A_mtx, B_mtx):
+    '''Computes the association metric, s(w,A,B).
+    word_vec: 1-D word vector
+    A_mtx, B_mtx: 2-D word vector arrays'''
+    A_dot_v = np.dot(A_mtx, word_vec)
+    B_dot_v = np.dot(B_mtx, word_vec)
+    A_norms = np.multiply(np.linalg.norm(A_mtx, axis=1), np.linalg.norm(word_vec))
+    B_norms = np.multiply(np.linalg.norm(B_mtx, axis=1), np.linalg.norm(word_vec))
+    A_cosines = np.divide(A_dot_v, A_norms)
+    B_cosines = np.divide(B_dot_v, B_norms)
+    return np.mean(A_cosines) - np.mean(B_cosines)
