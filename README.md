@@ -40,6 +40,8 @@ Navigate to the project home directory and run `python src/data/convert_glove.py
 
 The words that define each target sets and attribute sets must be manually coded and added to a file `src/data/<model_name>_experiment_definitions.py` For example, `src/data/glove_840B_experiment_definitions.py`. Once you have a model and the experiment definitions defined in the format laid out in this file, run `python src/data/<model_name>_experiment_definitions.py`. This script converts the hard-coded experiments into a format easily processed later in the pipeline.
 
+## Bias Values for Individual Words
+
 
 
 
