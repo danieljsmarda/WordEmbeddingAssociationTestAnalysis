@@ -6,6 +6,7 @@ from gensim.scripts.glove2word2vec import glove2word2vec
 # https://tedboy.github.io/nlps/generated/generated/gensim.models.Word2Vec.init_sims.html
 # https://groups.google.com/g/gensim/c/OvWlxJOAsCo
 # https://stackoverflow.com/questions/42986405/how-to-speed-up-gensim-word2vec-model-load-time/43067907
+# https://radimrehurek.com/gensim/scripts/glove2word2vec.html
 
 MODEL_NAME = input('Please type your model name here. The temp file model will be\
 saved to /src/data/interim/<MODEL_NAME>_tmp.txt\n->')
