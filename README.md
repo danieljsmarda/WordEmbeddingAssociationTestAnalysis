@@ -20,4 +20,9 @@ The structure of this repository loosely follows the [Cookiecutter Data Science]
 
 *Note on visualization code: By the standard Cookiecutter template, visualization functions are stored in the `src/visualization` folder. We removed this folder because the visualizations for this project are non-standard (in particular the visualization for single-word biases), so we choose to keep all visualization code in notebooks to allow for easier modification of the visualizations.
 
-# 
+# Pipeline and Reproduction Procedures
+
+This section is meant to be a full step-by-step tutorial. Experienced developers should be able to follow individual steps without excessive modification of source code.
+
+After [setting up your environment](#environment-setup), The first reproduction step is cloning this repository and clearing your `data` folder. Create a new folder in `data` called `external` and place your model in this folder. 
+
