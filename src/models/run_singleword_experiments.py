@@ -29,9 +29,9 @@ be loaded from ../../data/interim/<model_name>_experiment_definitions.pickle.\n\
 ->')
 
 # Load the model quickly.
-we_model = KeyedVectors.load(f'../../data/interim/{MODEL_NAME}_normed', mmap='r')
+we_model = KeyedVectors.load(f'../../data/interim/{MODEL_NAME}_norm', mmap='r')
 print('loading done!')
-print(f'Total words: {len(we_model.vocab)}')
+print(f'Total words in model: {len(we_model.vocab)}')
 
 EXPERIMENT_DEFINITION_PATH = f'../../data/interim/{MODEL_NAME}_experiment_definitions.pickle'
 RESULTS_FILEPATH = f'../../data/interim/{MODEL_NAME}_association_metric_exps.pickle'
