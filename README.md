@@ -34,13 +34,36 @@ Note, however, that the load pipeline converts GloVe vectors to word2vec vectors
 
 After [setting up your environment](#environment-setup), The first reproduction step is cloning this repository and clearing your `data` folder. Create a new folder in `data` called `external` and place your (GloVe) model in this folder. 
 
-Navigate to the project home directory and run `python src/data/convert_glove.py`. This script converts the GloVe vectors into the word2vec format necessary to run the rest of the processing. We recommend compressing the vectors (for details, see the links inside `convert_glove.py`). Without compression, the Common Crawl model takes about 10 minutes to load on a standard laptop (which occurs in all notebooks and `src/model` scripts). The compression process itself only takes a few minutes, but after compression, loading the compressed vectors is lightning-fast.
+Navigate to the home directory and run:
+
+```bash
+cd src/data && python convert_glove.py
+```
+
+(Note: because of the way the file paths are coded in the source, it is not possible to simply run `python src/data/convert_glove.py` or the program will not be able to find your saved data.)
+
+This script converts the GloVe vectors into the word2vec format necessary to run the rest of the processing. We recommend compressing the vectors (for details, see the links inside `convert_glove.py`). Without compression, the Common Crawl model takes about 10 minutes to load on a standard laptop (which occurs in all notebooks and `src/model` scripts). The compression process itself only takes a few minutes, but after compression, loading the compressed vectors is lightning-fast.
 
 ## Defining Experiments
 
-The words that define each target sets and attribute sets must be manually coded and added to a file `src/data/<model_name>_experiment_definitions.py` For example, `src/data/glove_840B_experiment_definitions.py`. Once you have a model and the experiment definitions defined in the format laid out in this file, run `python src/data/<model_name>_experiment_definitions.py`. This script converts the hard-coded experiments into a format easily processed later in the pipeline.
+The words that define each target sets and attribute sets must be manually coded and added to a file `src/data/<model_name>_experiment_definitions.py` For example,`src/data/glove_840B_experiment_definitions.py`.
+
+Once you have a model and the experiment definitions defined in the format laid out in this file, run
+
+```bash
+cd src/data && python glove_840B_experiment_definitions.py
+```
+This script converts the hard-coded experiments into a format easily processed later in the pipeline.
 
 ## Bias Values for Individual Words
+
+To calculate the bias values for each of the experiments, run
+
+```bash
+cd src/models && python run_singleword_experiments.py
+```
+
+**Approximate runtime for all 10 experiments:** 5 minutes
 
 
 

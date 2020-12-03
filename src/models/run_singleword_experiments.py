@@ -18,9 +18,9 @@ from utils import save_arrays, open_pickle, save_pickle, save_scalers
 '''
 glove_file = '../../data/external/glove.840B.300d/glove.840B.300d.txt'
 _ = glove2word2vec(glove_file, '../data/interim/glove_840_tmp.txt')
-we_model = KeyedVectors.load_word2vec_format('../data/interim/glove_840_tmp.txt')
+we_model = KeyedVectors.load_word2vec_format('../data/interim/glove_840B_tmp.txt')
 we_model.init_sims(replace=True)
-we_model.save('../data/interim/glove_840_norm')
+we_model.save('../data/interim/glove_840B_norm')
 '''
 
 MODEL_NAME = input('Please type your model name, then press ENTER. This name will be \
@@ -30,6 +30,8 @@ be loaded from ../../data/interim/<model_name>_experiment_definitions.pickle.\n\
 
 # Load the model quickly.
 we_model = KeyedVectors.load(f'../../data/interim/{MODEL_NAME}_norm', mmap='r')
+we_model = KeyedVectors.load(f'../../data/interim/{MODEL_NAME}_norm', mmap='r')
+
 print('loading done!')
 print(f'Total words in model: {len(we_model.vocab)}')
 
