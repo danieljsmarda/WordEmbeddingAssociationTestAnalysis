@@ -1,4 +1,5 @@
 import numpy as np
+import pdb
 from sklearn.preprocessing import MinMaxScaler
 from gensim.models import KeyedVectors, Word2Vec
 # You need the next import to save a compressed glove model
@@ -72,38 +73,45 @@ def add_quantile_ranges_to_dict(dct, biases):
     return dct
 
 
-def get_2ndorder_association_metric_list_for_target_list(target_list, A_terms, B_terms, we_model, exp_num):
+def get_2ndorder_association_metric_list_for_target_list(target_mtx, A_associations, B_associations, A_mtx, B_mtx, we_model, exp_num):
     
-    [X_mtx, _, A_mtx, B_mtx] = get_matrices_from_term_lists(we_model, target_list, target_list, A_terms, B_terms)
+    #pdb.set_trace()
+    all_associations = np.concatenate((A_associations, B_associations))
+    #scaler = MinMaxScaler(feature_range=(0,1))
+    #scaler.fit(all_associations.reshape(-1,1))
+    #save_scalers(SCALERS_FILEPATH, exp_num, 'second', scaler)
+    
+    _th = np.mean(np.abs(A_associations - B_associations))
+    #_th = scaler.transform(_th.reshape(-1, 1))[0,0]
+    
+    biases = A_associations - B_associations
+    #biases = scaler.transform(biases.reshape(-1, 1))
+    QR_dict = add_quantile_ranges_to_dict({}, biases)   
+    allwords_mean = np.mean(biases)
+
+    target_associations = np.apply_along_axis(lambda x_vec: calculate_cosines_for_target_word_unscaled(x_vec, A_mtx, B_mtx), 1, target_mtx)
+    
+    target_biases = []
+    for _assoc in target_associations:
+        #_A_assoc = scaler.transform(_assoc[0].reshape(-1, 1))[0,0]
+        #_B_assoc = scaler.transform(_assoc[1].reshape(-1, 1))[0,0]
+        _A_assoc = _assoc[0]
+        _B_assoc = _assoc[1]
+        _bias = _A_assoc - _B_assoc
+        target_biases.append(_bias)
+    return np.array(target_biases), _th, QR_dict, allwords_mean
+
+def run_exps_2ndorder(X_terms, Y_terms, A_terms, B_terms, exp_num):
+    
+    [X_mtx, Y_mtx, A_mtx, B_mtx] = get_matrices_from_term_lists(we_model, X_terms, Y_terms, A_terms, B_terms)
     
     # A_associations, B_associations are associations for all words    
     A_associations, B_associations = calculate_cosines_for_all_words_unscaled(we_model, A_mtx, B_mtx)
     
-    all_associations = np.concatenate((A_associations, B_associations))
-    scaler = MinMaxScaler(feature_range=(0,1))
-    scaler.fit(all_associations.reshape(-1,1))
-    save_scalers(SCALERS_FILEPATH, exp_num, 'second', scaler)
-    
-    _th = np.mean(np.abs(A_associations - B_associations))
-    _th = scaler.transform(_th.reshape(-1, 1))[0,0]
-    
-    biases = A_associations - B_associations
-    biases = scaler.transform(biases.reshape(-1, 1))
-    QR_dict = add_quantile_ranges_to_dict({}, biases)                                                             
-
-    target_associations = np.apply_along_axis(lambda x_vec: calculate_cosines_for_target_word_unscaled(x_vec, A_mtx, B_mtx), 1, X_mtx)
-    
-    target_biases = []
-    for _assoc in target_associations:
-        _A_assoc = scaler.transform(_assoc[0].reshape(-1, 1))[0,0]
-        _B_assoc = scaler.transform(_assoc[1].reshape(-1, 1))[0,0]
-        _bias = _A_assoc - _B_assoc
-        target_biases.append(_bias)
-    return np.array(target_biases), _th, QR_dict
-
-def run_exps_2ndorder(X_terms, Y_terms, A_terms, B_terms, exp_num):
-    X_metrics, _th, QR_dict = get_2ndorder_association_metric_list_for_target_list(X_terms, A_terms, B_terms, we_model, exp_num)
-    Y_metrics, _th, QR_dict = get_2ndorder_association_metric_list_for_target_list(Y_terms, A_terms, B_terms, we_model, exp_num)
+    X_metrics, _th, QR_dict, allwords_mean = get_2ndorder_association_metric_list_for_target_list(X_mtx, A_associations, 
+                                                                        B_associations, A_mtx, B_mtx, we_model, exp_num)
+    Y_metrics, _th, QR_dict, allwords_mean = get_2ndorder_association_metric_list_for_target_list(Y_mtx, A_associations, 
+                                                                        B_associations, A_mtx, B_mtx, we_model, exp_num)
     print (f'X_metrics: {X_metrics}')
     print (f'Y_metrics: {Y_metrics}')
 
@@ -117,7 +125,7 @@ def run_exps_2ndorder(X_terms, Y_terms, A_terms, B_terms, exp_num):
     # are saved.
     order = 'second'
     threshold = _th
-    save_arrays(RESULTS_FILEPATH, exp_num, order, X_metrics, Y_metrics, threshold, QR_dict)
+    save_arrays(RESULTS_FILEPATH, exp_num, order, X_metrics, Y_metrics, threshold, QR_dict, allwords_mean)
 
 def run_all_exps():
     exps = open_pickle(EXPERIMENT_DEFINITION_PATH)

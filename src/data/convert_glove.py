@@ -17,7 +17,7 @@ glove_file = '../../data/external/glove.840B.300d/glove.840B.300d.txt'
 _ = glove2word2vec(glove_file, f'../../data/interim/{MODEL_NAME}_tmp.txt')
 
 if compress == 'y':
-    we_model = KeyedVectors.load_word2vec_format('../data/interim/glove_840_tmp.txt')
+    we_model = KeyedVectors.load_word2vec_format(f'../../data/interim/{MODEL_NAME}_tmp.txt')
     we_model.init_sims(replace=True)
     we_model.save(f'../../data/interim/{MODEL_NAME}_norm')
     print(f'Model successfully saved to ../../data/interim/{MODEL_NAME}_norm')
