@@ -34,7 +34,20 @@ def get_test_stat(we_model, X_terms, Y_terms, A_terms, B_terms):
     mean_over_Ya = np.mean(cosine_sim_YA, axis=1)
     mean_over_Yb = np.mean(cosine_sim_YB, axis=1)
     s_for_Y_words = mean_over_Ya - mean_over_Yb
+    
     test_stat = np.mean(s_for_X_words) - np.mean(s_for_Y_words)
+    return test_stat
+
+# Fastest version, 10000 samples -> 1 minute per experiment
+def get_test_stat_onesided(we_model, Z_terms, A_terms, B_terms):  
+    [Z_mtx, _, A_mtx, B_mtx] = get_matrices_from_term_lists(we_model, Z_terms, Z_terms, A_terms, B_terms)
+    cosine_sim_ZA = cosine_similarity(Z_mtx, A_mtx)
+    cosine_sim_ZB = cosine_similarity(Z_mtx, B_mtx)
+    mean_over_Za = np.mean(cosine_sim_ZA, axis=1)
+    mean_over_Zb = np.mean(cosine_sim_ZB, axis=1)
+    s_for_Z_words = mean_over_Za - mean_over_Zb
+    
+    test_stat = np.mean(s_for_Z_words)
     return test_stat
 
 def get_n_test_stats(wv_obj, X_terms, Y_terms, A_terms, B_terms, n_samples=100):
@@ -50,18 +63,21 @@ def get_n_test_stats(wv_obj, X_terms, Y_terms, A_terms, B_terms, n_samples=100):
         X_sample = random.sample(vocab_list, k=n_targets)
         Y_sample = random.sample(vocab_list, k=n_targets)
         sigtest_dist_1.append(get_test_stat(wv_obj, X_sample, Y_sample, A_terms, B_terms))
-        sigtest_dist_2.append(get_test_stat(wv_obj, X_terms, Y_sample, A_terms, B_terms))
-        sigtest_dist_3.append(get_test_stat(wv_obj, Y_terms, X_sample, A_terms, B_terms))
+        _dist_onesided = get_test_stat_onesided(wv_obj, X_sample, A_terms, B_terms)
+        sigtest_dist_2.append(_dist_onesided)
+        sigtest_dist_3.append(_dist_onesided)
         # If the following line is used, we expect ST2 and 3 means to be roughly
         # the same on visualizations. If the line above is used, we expect them to be
         # roughly mirror images.
         #sigtest_dist_3.append(get_test_stat(wv_obj, X_sample, Y_terms, A_terms, B_terms))
     return np.array(sigtest_dist_1), np.array(sigtest_dist_2), np.array(sigtest_dist_3)
 
-def save_sigtest_pvalues(dists, exp_num, test_statistic):
+def save_sigtest_pvalues(dists, exp_num, test_statistics):
     pvalues = {}
     for i in range(3):
         dist = dists[i]
+        test_statistic = test_statistics[i]
+        
         loc = np.mean(dist)
         scale = np.std(dist, ddof=1)
         p = norm.cdf(test_statistic, loc=loc, scale=scale)
@@ -85,6 +101,7 @@ def save_errorbar_values(dists, exp_num):
             loc = np.mean(dist)
             scale = np.std(dist, ddof=1)
             interval_pct = float(interval_size)/100
+            #err = loc - norm.ppf((1-interval_pct)/2, loc=loc, scale=scale)
             err = loc - norm.ppf((1-interval_pct)/2, loc=loc, scale=scale)
             errors[f'sigtest_{i+1}'][interval_size] = err
     # The 'second' argument is necessary for saving
@@ -103,25 +120,25 @@ def run_all_sigtests(new_dists=False, n_samples=100):
         A_terms = exp['A_terms']
         B_terms = exp['B_terms']
         
-        test_statistic = get_test_stat(we_model, X_terms, Y_terms, A_terms, B_terms)
+        test_statistic_dist_1 = get_test_stat(we_model, X_terms, Y_terms, A_terms, B_terms)
+        test_statistic_dist_2 = get_test_stat_onesided(we_model, X_terms, A_terms, B_terms)
+        test_statistic_dist_3 = get_test_stat_onesided(we_model, Y_terms, A_terms, B_terms)
+        
         if new_dists:
             dist_1, dist_2, dist_3 = get_n_test_stats(we_model, X_terms, Y_terms, A_terms, B_terms, n_samples=n_samples)
         else:
             dist_1, dist_2, dist_3 = [results_dict[exp_num][order][f'sigtest_dist_{n}'] for n in [1,2,3]]
-        p_value = norm.cdf(test_statistic, loc=np.mean(dist_1), scale=np.std(dist_1))
+        #p_value = norm.cdf(test_statistic, loc=np.mean(dist_1), scale=np.std(dist_1))
   
-        save_experiment_arbitrary_label(RESULTS_FILEPATH, exp_num, order,
-                                        'sigtest_dist_1', dist_1)
-        save_experiment_arbitrary_label(RESULTS_FILEPATH, exp_num, order,
-                                        'sigtest_dist_2', dist_2)
-        save_experiment_arbitrary_label(RESULTS_FILEPATH, exp_num, order,
-                                        'sigtest_dist_3', dist_3)
-        save_experiment_arbitrary_label(RESULTS_FILEPATH, exp_num, order,
-                                        'test_statistic', test_statistic)
-        save_experiment_arbitrary_label(RESULTS_FILEPATH, exp_num, order,
-                                        'ST1_p-value', p_value)
+        save_experiment_arbitrary_label(RESULTS_FILEPATH, exp_num, order, 'sigtest_dist_1', dist_1)
+        save_experiment_arbitrary_label(RESULTS_FILEPATH, exp_num, order, 'sigtest_dist_2', dist_2)
+        save_experiment_arbitrary_label(RESULTS_FILEPATH, exp_num, order, 'sigtest_dist_3', dist_3)
+        save_experiment_arbitrary_label(RESULTS_FILEPATH, exp_num, order, 'test_statistic_dist_1', test_statistic_dist_1)
+        save_experiment_arbitrary_label(RESULTS_FILEPATH, exp_num, order, 'test_statistic_dist_2', test_statistic_dist_2)
+        save_experiment_arbitrary_label(RESULTS_FILEPATH, exp_num, order, 'test_statistic_dist_3', test_statistic_dist_3)
+        #save_experiment_arbitrary_label(RESULTS_FILEPATH, exp_num, order, 'ST1_p-value', p_value)
         save_errorbar_values([dist_1, dist_2, dist_3], exp_num)
-        save_sigtest_pvalues([dist_1, dist_2, dist_3], exp_num, test_statistic)
+        save_sigtest_pvalues([dist_1, dist_2, dist_3], exp_num, [test_statistic_dist_1, test_statistic_dist_2, test_statistic_dist_3])
 
 
 if __name__ == '__main__':

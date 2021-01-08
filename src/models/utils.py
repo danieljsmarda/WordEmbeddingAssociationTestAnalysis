@@ -1,6 +1,7 @@
 import pickle
 import numpy as np
 from collections import defaultdict
+import os
 
 def save_pickle(obj, filepath):
     '''Save obj to the specified filepath.'''
@@ -10,14 +11,19 @@ def save_pickle(obj, filepath):
 
 def open_pickle(filepath):
     '''Get obj from the specified filepath.'''
-    f = open(filepath, 'rb')
-    obj = pickle.load(f)
-    f.close()
+    if os.path.exists(filepath):
+        f = open(filepath, 'rb')
+        obj = pickle.load(f)
+        f.close()
+    else:
+        obj = None
     return obj
 
-def save_arrays(FILEPATH, exp_num, order, X_metrics, Y_metrics, threshold, QR_dict):
+def save_arrays(FILEPATH, exp_num, order, X_metrics, Y_metrics, threshold, QR_dict, allwords_mean):
     '''Primary save function for the results of the single-word experiments.'''
     results_dict = open_pickle(FILEPATH)
+    if results_dict == None:
+        results_dict = {}
     results_dict[exp_num] = results_dict.get(exp_num, defaultdict(dict))
     order_dict = results_dict[exp_num].get(order, {})
     order_dict['X_array'] = X_metrics
@@ -26,6 +32,7 @@ def save_arrays(FILEPATH, exp_num, order, X_metrics, Y_metrics, threshold, QR_di
     order_dict['Y_mean'] = np.mean(Y_metrics)
     order_dict['threshold'] = threshold
     order_dict['QR_dict'] = QR_dict
+    order_dict['allwords_mean'] = allwords_mean
     results_dict[exp_num][order] = order_dict
     save_pickle(results_dict, FILEPATH)
     print(f"Results successfully saved to file {FILEPATH} under\
