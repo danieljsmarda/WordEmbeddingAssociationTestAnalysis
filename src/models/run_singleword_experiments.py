@@ -99,7 +99,7 @@ def get_2ndorder_association_metric_list_for_target_list(target_mtx, A_associati
         _B_assoc = _assoc[1]
         _bias = _A_assoc - _B_assoc
         target_biases.append(_bias)
-    return np.array(target_biases), _th, QR_dict, allwords_mean
+    return np.array(target_biases), _th, QR_dict, allwords_mean, biases
 
 def run_exps_2ndorder(X_terms, Y_terms, A_terms, B_terms, exp_num):
     
@@ -108,9 +108,9 @@ def run_exps_2ndorder(X_terms, Y_terms, A_terms, B_terms, exp_num):
     # A_associations, B_associations are associations for all words    
     A_associations, B_associations = calculate_cosines_for_all_words_unscaled(we_model, A_mtx, B_mtx)
     
-    X_metrics, _th, QR_dict, allwords_mean = get_2ndorder_association_metric_list_for_target_list(X_mtx, A_associations, 
+    X_metrics, _th, QR_dict, allwords_mean, all_biases = get_2ndorder_association_metric_list_for_target_list(X_mtx, A_associations, 
                                                                         B_associations, A_mtx, B_mtx, we_model, exp_num)
-    Y_metrics, _th, QR_dict, allwords_mean = get_2ndorder_association_metric_list_for_target_list(Y_mtx, A_associations, 
+    Y_metrics, _th, QR_dict, allwords_mean, all_biases = get_2ndorder_association_metric_list_for_target_list(Y_mtx, A_associations, 
                                                                         B_associations, A_mtx, B_mtx, we_model, exp_num)
     print (f'X_metrics: {X_metrics}')
     print (f'Y_metrics: {Y_metrics}')
@@ -125,7 +125,7 @@ def run_exps_2ndorder(X_terms, Y_terms, A_terms, B_terms, exp_num):
     # are saved.
     order = 'second'
     threshold = _th
-    save_arrays(RESULTS_FILEPATH, exp_num, order, X_metrics, Y_metrics, threshold, QR_dict, allwords_mean)
+    save_arrays(RESULTS_FILEPATH, exp_num, order, X_metrics, Y_metrics, threshold, QR_dict, allwords_mean, all_biases)
 
 def run_all_exps():
     exps = open_pickle(EXPERIMENT_DEFINITION_PATH)

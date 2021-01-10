@@ -19,7 +19,7 @@ def open_pickle(filepath):
         obj = None
     return obj
 
-def save_arrays(FILEPATH, exp_num, order, X_metrics, Y_metrics, threshold, QR_dict, allwords_mean):
+def save_arrays(FILEPATH, exp_num, order, X_metrics, Y_metrics, threshold, QR_dict, allwords_mean, all_biases):
     '''Primary save function for the results of the single-word experiments.'''
     results_dict = open_pickle(FILEPATH)
     if results_dict == None:
@@ -33,6 +33,7 @@ def save_arrays(FILEPATH, exp_num, order, X_metrics, Y_metrics, threshold, QR_di
     order_dict['threshold'] = threshold
     order_dict['QR_dict'] = QR_dict
     order_dict['allwords_mean'] = allwords_mean
+    order_dict['all_biases'] = all_biases
     results_dict[exp_num][order] = order_dict
     save_pickle(results_dict, FILEPATH)
     print(f"Results successfully saved to file {FILEPATH} under\
