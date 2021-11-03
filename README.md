@@ -1,7 +1,5 @@
 # Welcome
 
-This repository accompanies the paper <paper_name_here>. 
-
 # Environment Setup
 
 This code was created and tested with [Miniconda](https://docs.conda.io/en/latest/miniconda.html) version 4.9.1.
