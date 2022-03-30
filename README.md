@@ -1,6 +1,6 @@
 # Welcome
 
-Welcome. This repository contains the relevant code for the paper ["Linguistically Context Aware Text Corpora Bias Measurement"](reports/paper.pdf). In it, we show that the traditional subtractive metric [(Caliskan et al., 2017)](https://www.science.org/doi/10.1126/science.aal4230) used to assess bias between two protected groups in GloVe word embeddings is nonzero by a statistically significant amount in multiple sociological domains, This holds important implications for creating both useful and socially fair language models.
+Welcome. This repository contains the relevant code for the paper ["Linguistically Context Aware Text Corpora Bias Measurement"](reports/paper.pdf). In it, we show that the traditional subtractive metric [(Caliskan et al., 2017)](https://www.science.org/doi/10.1126/science.aal4230) used to assess bias between two protected groups in GloVe word embeddings is nonzero by a statistically significant amount in multiple sociological domains. This holds important implications for creating both useful and socially fair language models.
 
 # Environment Setup
 
